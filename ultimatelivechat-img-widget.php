@@ -5,7 +5,7 @@ wp_enqueue_style('jlc-css', $hostedURI.'components/com_jlivechat/assets/css/jliv
 // Inject Javascript
 wp_enqueue_script('jlc-lazyload', $hostedURI.'components/com_jlivechat/js/lazyload-min.js');
 wp_enqueue_script('jlc-jlivechat', $hostedURI.'components/com_jlivechat/js/jlivechat.min.js');
-wp_enqueue_script('jlc-init', plugins_url().'/ultimatelivechat/ultimatelivechat-init.js.php?hosted_mode_path='.urlencode($hostedURI));
+wp_enqueue_script('jlc-init', plugins_url().'/ultimate-live-chat/ultimatelivechat-init.js.php?hosted_mode_path='.urlencode($hostedURI));
 
 if(!class_exists('mod_ulc_helper')) 
 {
