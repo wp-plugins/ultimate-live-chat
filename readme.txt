@@ -1,12 +1,12 @@
 === Ultimate Live Chat ===
 Contributors: cmsfruit
-Tags: live chat, livechat, chat, wordpress livechat, live support, wordpress live support
+Tags: live chat, livechat, chat, wordpress livechat, live support, wordpress live support, jlive chat, jlivechat, cms fruit, cmsfruit
 Requires at least: 3.0
 Tested up to: 3.3
 Stable tag: 1.0
 Donate link: http://www.UltimateLiveChat.com/
 
-Add live chat support and real-time monitoring onto your WordPress website with [Ultimate Live Chat](http://www.ultimatelivechat.com/)
+Add live chat support and real-time monitoring onto your WordPress website with Ultimate Live Chat from UltimateLiveChat.com!
 
 == Description ==
 
@@ -22,6 +22,7 @@ Features include:
 * Unlimited operators - Enjoy the benefit of unlimited operators!
 * Unlimited chat sessions - No restrictions on your chatting abilities what so ever!
 * Proactive chat capability - Engage in a proactive chat session with any of your website visitors.
+* WordPress User Database Native Integration - integrates with built-in WordPress user database to display registered user information.
 * Route livechat requests - Pre-define which operators will receive a request based on a specific criteria like the visitor's country.
 * Supports multiple websites - Provide live support and monitor all your websites from one application.
 * Ring operators simultaneously or in order - Ring all the operators at the same time or in a specific order.
@@ -52,7 +53,9 @@ To upgrade simply uninstall the old version and then install the new version.
 
 == Screenshots ==
 
-1. Admin panel.
+1. Operators Management Page. (Admin Panel On UltimateLiveChat.com)
+2. Visitor Live Chat Popup Window.
+3. Operator Desktop Application.
 
 == Installation ==
 
@@ -64,7 +67,7 @@ To upgrade simply uninstall the old version and then install the new version.
 
 = Can I run Ultimate Live Chat completely on my own server and not as a hosted solution? =
 
-Yes, you can, however that would require you install Joomla! CMS into a subfolder on your WordPress website and then bridge the connection. You can find out more about this topic [here](http://www.cmsfruit.com/wiki/index.php?title=JLive_Chat#Installing_on_non-Joomla_website). 
+Yes, you can, but you need to install Joomla! CMS into a subfolder on your WordPress website and then bridge the connection, because JLive! Chat requires Joomla CMS as the base in order to run it in stand-alone mode on your own server. You can find out more about this topic [here](http://www.cmsfruit.com/wiki/index.php?title=JLive_Chat#Installing_on_non-Joomla_website). 
 
 == Changelog ==
 
