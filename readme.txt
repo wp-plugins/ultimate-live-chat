@@ -65,6 +65,18 @@ To upgrade simply uninstall the old version and then install the new version.
 
 == Frequently Asked Questions ==
 
+= Where can I find additional documentation? =
+
+You can find additional documentation [here](http://www.ultimatelivechat.com/support/documentation.html?q=%2Fsupport%2Fdocumentation.html&start=2)
+
+= Is there a free trial period I can use? =
+
+Yes :) You can download and try Ultimate Live Chat free for 5 days simply by registering [here](https://www.ultimatelivechat.com/my-account.html).
+
+= How much does it cost =
+
+We offer several different hosted livechat packages which range from $49.95 a year to $149.95 depending on the number of operators you have. You can find our different hosted mode packages and details [here](http://www.ultimatelivechat.com/learn-more.html#price).
+
 = Can I run Ultimate Live Chat completely on my own server and not as a hosted solution? =
 
 Yes, you can, but you need to install Joomla! CMS into a subfolder on your WordPress website and then bridge the connection, because JLive! Chat requires Joomla CMS as the base in order to run it in stand-alone mode on your own server. You can find out more about this topic [here](http://www.cmsfruit.com/wiki/index.php?title=JLive_Chat#Installing_on_non-Joomla_website). 
