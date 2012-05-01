@@ -1,11 +1,11 @@
 <?php
 // Inject CSS Styles
-wp_enqueue_style('jlc-css', $hostedURI.'components/com_jlivechat/assets/css/jlivechat.min.css');
+//wp_enqueue_style('jlc-css', $hostedURI.'components/com_jlivechat/assets/css/jlivechat.min.css');
 
 // Inject Javascript
-wp_enqueue_script('jlc-lazyload', $hostedURI.'components/com_jlivechat/js/lazyload-min.js');
-wp_enqueue_script('jlc-jlivechat', $hostedURI.'components/com_jlivechat/js/jlivechat.min.js');
-wp_enqueue_script('jlc-init', plugins_url().'/ultimate-live-chat/ultimatelivechat-init.js.php?hosted_mode_path='.urlencode($hostedURI));
+//wp_enqueue_script('jlc-lazyload', $hostedURI.'components/com_jlivechat/js/lazyload-min.js');
+//wp_enqueue_script('jlc-jlivechat', $hostedURI.'components/com_jlivechat/js/jlivechat.min.js');
+//wp_enqueue_script('jlc-init', plugins_url().'/ultimate-live-chat/ultimatelivechat-init.js.php?hosted_mode_path='.urlencode($hostedURI));
 
 if(!class_exists('mod_ulc_helper')) 
 {
@@ -69,5 +69,14 @@ if(!class_exists('mod_ulc_helper'))
 	}
 }
 ?>
+<link rel="stylesheet" type="text/css"  href="<?php echo rtrim($hostedURI, '/'); ?>/components/com_jlivechat/assets/css/jlivechat.min.css" />
+<script type="text/javascript" src="<?php echo rtrim($hostedURI, '/'); ?>/components/com_jlivechat/js/lazyload-min.js"></script>
+<script type="text/javascript" src="<?php echo rtrim($hostedURI, '/'); ?>/components/com_jlivechat/js/jlivechat.min.js"></script>
+<script type="text/javascript">
+	JLiveChat.hostedModeURI='<?php echo rtrim($hostedURI, '/'); ?>';
+	JLiveChat.websiteRoot='<?php echo rtrim($hostedURI, '/'); ?>';
+	
+	setTimeout('JLiveChat.initialize();', 100);
+</script>
 <img src="<?php echo mod_ulc_helper::get_tracker_image_uri(); ?>" width="1" height="1" alt="" border="0" />
 <a class="ulc_livechat_img" href="javascript:void(0);" onclick="requestLiveChat('<?php echo mod_ulc_helper::get_popup_uri($instance['popup_mode'], $instance['specific_operators'], $instance['specific_department'], $instance['specific_route_id']); ?>', '<?php echo $instance['popup_mode']; ?>');"><img src="<?php echo mod_ulc_helper::get_dynamic_image_uri($instance['image_size'], $instance['specific_operators'], $instance['specific_department'], $instance['specific_route_id']); ?>" alt="" border="0" /></a>
