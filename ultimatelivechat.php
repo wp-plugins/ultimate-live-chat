@@ -4,12 +4,15 @@ Plugin Name: Ultimate Live Chat
 Plugin URI: http://www.ultimatelivechat.com
 Description: Plugin/Widget for enabling Ultimate Live Chat on your website.
 Author: CMS Fruit
-Version: 1.0
+Version: 1.1
 Author URI: http://www.cmsfruit.com
 */
 
 class ulc_img_widget extends WP_Widget 
 {
+	var $hostedUri = null;
+	var $scriptsAlreadyAdded = false;
+	
 	/**
 	 * Register widget with WordPress.
 	 */
@@ -19,6 +22,116 @@ class ulc_img_widget extends WP_Widget
 			'Ultimate Live Chat Online/Offline Image', // Name
 			array( 'description' => __( 'Ultimate Live Chat Online/Offline Image Widget', 'text_domain' ), ) // Args
 		);
+		
+		$instance = $this->get_livechat_settings();
+		
+		if(!empty($instance))
+		{
+			// Okay we have livechat settings
+			if(!empty($instance['hosted_mode_uri_override'])) 
+			{
+				$hostedURI = $instance['hosted_mode_uri_override'];
+			}
+			elseif(!empty($instance['hosted_mode_api_key']) && !empty($instance['hosted_mode_user_id']) && !empty($instance['hosted_mode_path']))
+			{
+				if(strtolower(@$_SERVER['HTTPS']) == 'on') 
+				{
+					$hostedURI = 'https://';
+				}
+				else
+				{
+					$hostedURI = 'http://';
+				}
+				
+				$hostedURI .= 'www.ultimatelivechat.com/sites/'.$instance['hosted_mode_user_id'].'/'.$instance['hosted_mode_path'].'/';
+			}
+			else
+			{
+				$hostedURI = false;
+			}
+			
+			if(!empty($hostedURI))
+			{
+				// We have all the hosted livechat settings, inject javascript
+				$this->hostedUri = rtrim($hostedURI, '/');
+				
+				add_action('wp_enqueue_scripts', array($this, 'add_external_scripts'));
+				add_action('wp_footer', array($this, 'add_inline_scripts'));
+			}
+		}
+	}
+	
+	public function add_external_scripts()
+	{
+		if(!empty($this->hostedUri) && !$this->scriptsAlreadyAdded)
+		{
+			wp_enqueue_style('jlc', $this->hostedUri.'/components/com_jlivechat/assets/css/jlivechat.min.css');
+				
+			wp_enqueue_script('jlc-lazyload', $this->hostedUri.'/components/com_jlivechat/js/lazyload-min.js');
+			wp_enqueue_script('jlc-main', $this->hostedUri.'/components/com_jlivechat/js/jlivechat.min.js');
+		}
+	}
+	
+	public function add_inline_scripts()
+	{
+		if(!empty($this->hostedUri) && !$this->scriptsAlreadyAdded)
+		{
+			$this->scriptsAlreadyAdded = true;
+			
+			$trackerImgUri = $this->get_tracker_image_uri();
+			
+			echo <<<EOF
+<script type="text/javascript">
+	JLiveChat.hostedModeURI='{$this->hostedUri}';
+	JLiveChat.websiteRoot='{$this->hostedUri}';
+
+	setTimeout('JLiveChat.initialize();', 100);
+</script>
+<img src="{$trackerImgUri}" width="1" height="1" alt="" border="0" />	
+EOF;
+		}
+	}
+	
+	public function get_livechat_settings()
+	{
+		$livechatSettings = get_option($this->option_name);
+		
+		if(!empty($livechatSettings) && is_array($livechatSettings))
+		{
+			foreach($livechatSettings as $key => $value)
+			{
+				if(isset($livechatSettings[$key]['hosted_mode_api_key'])) return $value;
+			}
+		}
+	}
+	
+	public function get_tracker_image_uri()
+	{
+		$current_user = wp_get_current_user();
+		
+		$trackerUri = $this->hostedUri.'/index.php?option=com_jlivechat&amp;no_html=1&amp;tmpl=component';
+		
+		if(strtolower(@$_SERVER['HTTPS']) == 'on') 
+		{
+			$scheme = 'https://';
+		}
+		else
+		{
+			$scheme = 'http://';
+		}
+		
+		$currentUrl = $scheme.@$_SERVER['SERVER_NAME'].@$_SERVER['REQUEST_URI'];
+		
+		$trackerUri .= '&amp;view=popup';
+		$trackerUri .= '&amp;task=track_remote_visitor';
+		if(isset($current_user->ID)) $trackerUri .= '&amp;user_id='.$current_user->ID;
+		if(isset($current_user->display_name)) $trackerUri .= '&amp;full_name='.urlencode($current_user->display_name);
+		if(isset($current_user->user_login)) $trackerUri .= '&amp;username='.urlencode($current_user->user_login);
+		if(isset($current_user->user_email)) $trackerUri .= '&amp;email='.urlencode($current_user->user_email);
+		if(isset($_SERVER['HTTP_REFERER'])) $trackerUri .= '&amp;referrer='.urlencode($_SERVER['HTTP_REFERER']);
+		$trackerUri .= '&amp;last_uri='.urlencode($currentUrl);
+		
+		return $trackerUri;
 	}
 
 	/**
