@@ -233,16 +233,32 @@ EOF;
 			// Validate key
 			$checkUri = 'https://www.ultimatelivechat.com/index.php?option=com_ultimatelivechat&view=api&format=raw&task=validate_api_key2&k='.urlencode($key);
 			
-			$keyDetails = file_get_contents($checkUri);
+			# initialise the CURL library
+			$ch = curl_init();
+			
+			# specify the URL to be retrieved
+			curl_setopt($ch, CURLOPT_URL, $checkUri);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+			
+			$keyDetails = curl_exec($ch);
+			
+			curl_close($ch);
+			
 			$keyDetails = json_decode($keyDetails);
-
-			if($keyDetails->success && isset($keyDetails->user_id) && isset($keyDetails->path))
+			
+			if(!empty($keyDetails))
 			{
-				// Api Key was successfully validated
-				$instance['hosted_mode_display_api_key'] = '*****************************';
-				$instance['hosted_mode_api_key'] = $key;
-				$instance['hosted_mode_user_id'] = $keyDetails->user_id;
-				$instance['hosted_mode_path'] = $keyDetails->path;
+				if($keyDetails->success && isset($keyDetails->user_id) && isset($keyDetails->path))
+				{
+					// Api Key was successfully validated
+					$instance['hosted_mode_display_api_key'] = '*****************************';
+					$instance['hosted_mode_api_key'] = $key;
+					$instance['hosted_mode_user_id'] = $keyDetails->user_id;
+					$instance['hosted_mode_path'] = $keyDetails->path;
+				}
 			}
 		}
 		
