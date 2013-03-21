@@ -1,11 +1,11 @@
 === Ultimate Live Chat ===
 Contributors: cmsfruit
-Tags: live chat, livechat, chat, wordpress livechat, live support, wordpress live support, jlive chat, jlivechat, cms fruit, cmsfruit
+Tags: wordpress live chat, live chat, live support, chat, wordpress live support, jlive chat, jlivechat, ultimate live chat, cmsfruit
 Requires at least: 3.0
-Tested up to: 3.3
-Stable tag: 1.1
+Tested up to: 3.5
+Stable tag: 1.2
 License: LGPL v3.0 http://www.gnu.org/licenses/lgpl.html
-Donate link: http://www.UltimateLiveChat.com/
+Donate link: http://www.ultimatelivechat.com/learn-more.html#price
 
 Add live chat support and real-time monitoring onto your WordPress website with Ultimate Live Chat from UltimateLiveChat.com!
 
@@ -48,6 +48,9 @@ Features include:
 * Lifetime support & updates included - Lifetime upgrades and support included with every license because we stand behind our product 200%!
 
 == Upgrade Notice ==
+= 1.2 =
+To upgrade simply uninstall the old version and then install the new version.
+
 = 1.1 =
 To upgrade simply uninstall the old version and then install the new version.
 
@@ -85,6 +88,9 @@ We offer several different hosted livechat packages which range from $49.95 a ye
 Yes, you can, but you need to install Joomla! CMS into a subfolder on your WordPress website and then bridge the connection, because JLive! Chat requires Joomla CMS as the base in order to run it in stand-alone mode on your own server. You can find out more about this topic [here](http://www.cmsfruit.com/wiki/index.php?title=JLive_Chat#Installing_on_non-Joomla_website). 
 
 == Changelog ==
+= 1.2 =
+* Made some minor code optimizations and bug fixes to make plugin MORE compatible with newer versions of WordPress.
+
 = 1.1 =
 * Fixed issue with livechat javascript files not being included on all pages. 
 
